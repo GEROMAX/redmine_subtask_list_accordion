@@ -1,0 +1,6 @@
+# Japanese strings go here for Rails i18n
+ja:
+  list_all_expand: "すべて展開"
+  list_all_collapse: "すべて収縮"
+  context_menu_expand: "このツリーを展開"
+  context_menu_collapse: "このツリーを収縮"
