@@ -4,3 +4,4 @@ ja:
   list_all_collapse: "すべて収縮"
   context_menu_expand: "このツリーを展開"
   context_menu_collapse: "このツリーを収縮"
+  context_menu_all_expand_next: "この階層をすべて展開"

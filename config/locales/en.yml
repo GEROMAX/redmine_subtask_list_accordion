@@ -4,3 +4,4 @@ en:
   list_all_collapse: "All Collapse"
   context_menu_expand: "Expand this tree"
   context_menu_collapse: "Collapse this tree"
+  context_menu_all_expand_next: "Expand next level all"

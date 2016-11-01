@@ -192,3 +192,36 @@ function seletedTreeClose()
     parentTR.removeClass("expand").addClass("collapse");
   }
 }
+
+function allExpandNext()
+{
+  var parentTR = slaTRs.filter("tr:has(td.checkbox > input:checked)");
+  if (parentTR.size() != 1)
+  {
+    exit;
+  }
+  if (!parentTR.hasClass("haschild"))
+  {
+    exit;
+  }
+  
+  //make rank
+  for (var rank = 0; rank <= (parentTR.attr("rank") - 0 + 1); rank++)
+  {
+    var parentFound = false;
+    var parentPos = { val: 0 };
+    do
+    {
+      parentFound = setAccordion(parentPos, rank, true, false);
+    }
+    while(parentFound);
+    
+    //show
+    if (rank <= (parentTR.attr("rank") - 0))
+    {
+      slaTRs.filter("tr[rank='" + rank + "'].haschild.collapse").each(function(){
+        childIssueShowOrHide($(this));
+      });
+    }
+  }
+}
