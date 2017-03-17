@@ -24,25 +24,27 @@
   background-image: url(../../../images/arrow_collapsed.png);
 }
 
-tr.issue.idnt td.subject a {
-  background: none;
-  padding-left: 0px;
+tr.issue.idnt td.subject {background: none;}
+tr.issue.idnt-1 td.subject {padding-left: 18px;}
+tr.issue.idnt-2 td.subject {padding-left: 34px;}
+tr.issue.idnt-3 td.subject {padding-left: 50px;}
+tr.issue.idnt-4 td.subject {padding-left: 66px;}
+tr.issue.idnt-5 td.subject {padding-left: 82px;}
+tr.issue.idnt-6 td.subject {padding-left: 98px;}
+tr.issue.idnt-7 td.subject {padding-left: 114px;}
+tr.issue.idnt-8 td.subject {padding-left: 130px;}
+tr.issue.idnt-9 td.subject {padding-left: 146px;}
+
+tr.issue:not(.idnt):not(.haschild) td.subject a {
+  margin-left: 16px;
 }
 
 tr.issue.idnt:not(.haschild) td.subject a {
-  margin-left: 32px;
+  margin-left: 16px;
 }
 
 tr.issue.haschild > td.subject > span.treearrow {
   cursor: pointer;
-}
-
-tr.issue.haschild:not(.idnt) > td.subject > span.treearrow {
-  padding-left: 16px;
-}
-
-tr.issue.haschild.idnt > td.subject > span.treearrow {
-  margin-left: 16px;
   padding-left: 16px;
 }
 
