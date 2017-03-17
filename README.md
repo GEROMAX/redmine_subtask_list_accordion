@@ -12,6 +12,7 @@ This plugin provide accordion to subtask list of issue.
 Redmine 3.x stable
 
 Tested on:
+* 3.3.2
 * 3.1.2
 * 3.0.4
 
