@@ -1,0 +1,7 @@
+# French - Laurent HADJADJ - 09/11/2016
+fr:
+  list_all_expand: "Ouvrir tout"
+  list_all_collapse: "Fermer tout"
+  context_menu_expand: "Ouvrir l'arborescence"
+  context_menu_collapse: "Fermer l'arborescence"
+  context_menu_all_expand_next: "Ouvrir le niveau suivant"

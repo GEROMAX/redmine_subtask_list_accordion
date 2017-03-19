@@ -9,11 +9,10 @@ This plugin provide accordion to subtask list of issue.
 
 ## Compatibility
 
-Redmine 3.x stable
+Redmine 3.3 stable
 
 Tested on:
-* 3.1.2
-* 3.0.4
+* 3.3.2
 
 ## Installation
 
