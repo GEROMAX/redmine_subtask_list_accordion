@@ -1,5 +1,5 @@
 # English strings go here for Rails i18n
-en:
+zh:
   list_all_expand: "全部展开"
   list_all_collapse: "全部收拢"
   context_menu_expand: "展开当前树形结构"
