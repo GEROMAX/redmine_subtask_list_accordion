@@ -7,6 +7,7 @@ module SubtaskListAccordionHelperPatch
     base.class_eval do
       # add method to IssuesHelper
       alias_method :expand_tree_at_first?, :def_expand_tree_at_first?
+      alias_method :has_grandson_issues?, :def_has_grandson_issues?
     end
   end
 
@@ -17,6 +18,9 @@ module SubtaskListAccordionHelperPatch
       else
         return false
       end
+    end
+    def def_has_grandson_issues?(issue)
+      return issue.descendants.visible.where(["issues.parent_id <> ?", issue.id]).count > 0
     end
   end
 end
