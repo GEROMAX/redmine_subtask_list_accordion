@@ -5,3 +5,4 @@ ja:
   context_menu_expand: "このツリーを展開"
   context_menu_collapse: "このツリーを収縮"
   context_menu_all_expand_next: "この階層をすべて展開"
+  field_subtasks_default_expand_limit_upper: "デフォルトでツリーを展開する時の子チケット数上限"

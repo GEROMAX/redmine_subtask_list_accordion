@@ -7,16 +7,32 @@
 <script>
   $(document).ready(function()
   {
-    //make first rank
+    //make rank first time
     slaTRs = $("table.list > tbody > tr");
     slaTRsSize = slaTRs.size();
-    var parentPos = { val: 0 };
-    var parentFound;
-    do
+    if (<%= expand_tree_at_first?(@issue, User.current) %>)
     {
-      parentFound = setAccordion(parentPos, 0, true, true);
+      for (var rank = 0; rank < 10; rank++)
+      {
+        var parentPos = { val: 0 };
+        var parentFound = false;
+        do
+        {
+          parentFound = setAccordion(parentPos, rank, false, false);
+        }
+        while(parentFound);
+      }
     }
-    while(parentFound);
+    else
+    {
+      var parentPos = { val: 0 };
+      var parentFound;
+      do
+      {
+        parentFound = setAccordion(parentPos, 0, true, true);
+      }
+      while(parentFound);
+    }
     
     //all expand
     $("a.subtask_all_expand").one("click", function(){

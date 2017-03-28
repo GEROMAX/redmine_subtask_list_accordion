@@ -5,3 +5,4 @@ en:
   context_menu_expand: "Expand this tree"
   context_menu_collapse: "Collapse this tree"
   context_menu_all_expand_next: "Expand next level all"
+  field_subtasks_default_expand_limit_upper: "Upper limit of child issues to tree expanding from the first time"
