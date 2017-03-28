@@ -5,3 +5,4 @@ zh:
   context_menu_expand: "展开当前树形结构"
   context_menu_collapse: "收拢当前树形结构"
   context_menu_all_expand_next: "下一级全部展开"
+  field_subtasks_default_expand_limit_upper: "Upper limit of child issues to tree expanding from the first time"
