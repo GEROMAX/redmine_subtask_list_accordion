@@ -6,6 +6,7 @@ This plugin provide accordion to subtask list of issue.
 
 * Add accordion feature to subtask-list.
 * Add function 'Expand this tree', 'Collapse this tree' and 'Expand next level all' to context-menu.
+* Add preferences of expand tree at first time.
 
 ## Compatibility
 
