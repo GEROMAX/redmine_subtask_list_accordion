@@ -2,6 +2,8 @@
 
 This plugin provide accordion to subtask list of issue.
 
+* http://www.redmine.org/plugins/redmine_subtask_list_accordion
+
 ## Features
 
 * Add accordion feature to subtask-list.
@@ -14,6 +16,7 @@ Redmine 3.3 stable
 
 Tested on:
 * 3.3.2
+* 3.3.3
 
 ## Installation
 
