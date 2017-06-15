@@ -1,7 +1,8 @@
 # Redmine Subtask List Accordion
 
 This plugin provide accordion to subtask list of issue.
-http://www.redmine.org/plugins/redmine_subtask_list_accordion
+
+* http://www.redmine.org/plugins/redmine_subtask_list_accordion
 
 ## Features
 
