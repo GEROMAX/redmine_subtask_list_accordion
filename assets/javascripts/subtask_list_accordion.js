@@ -15,18 +15,18 @@ function getParentIssue(startPos, rank, sameTreeOnly)
   var issuesSelector = "table.list > tbody > tr";
   var rankAttr = rank <= 0 ? ":not(.idnt)" : "tr.idnt-" + rank;
   var nextAttr = "tr.idnt-" + (rank + 1 - 0);
-  var selectorP = startPos.val > 0 ? ":gt(" + startPos.val + ")" + rankAttr : rankAttr;
+  var selectorP = (startPos.val + rank) > 0 ? ":gt(" + startPos.val + ")" + rankAttr : rankAttr;
   var selectorC = nextAttr + ":first";
   var pp = $(issuesSelector + selectorP + " + " + selectorC);
 
   if (pp.size() != 1)
   {
+    //no parent
     return $();
   }
-  
-  //get parent  
+
+  //get parent
   startPos.val = pp.index() - 1;
-  
   return slaTRs.filter(function(index){ 
     return index == startPos.val;
   });
@@ -98,7 +98,7 @@ function childIssueShowOrHide(parentTR)
 
 function setAccordion(parentPos, rank, isHiding, sameTreeOnly)
 {
-  var parentTR = getParentIssue(parentPos, rank, sameTreeOnly);  
+  var parentTR = getParentIssue(parentPos, rank, sameTreeOnly);
   if (parentTR.size() != 1)
   {
     return false;
@@ -210,13 +210,16 @@ function allExpandNext()
   //make rank
   for (var rank = 0; rank <= (parentTR.attr("rank") - 0 + 1); rank++)
   {
-    var parentFound = false;
-    var parentPos = { val: 0 };
-    do
+    if (rank > 0)
     {
-      parentFound = setAccordion(parentPos, rank, true, false);
+      var parentFound = false;
+      var parentPos = { val: 0 };
+      do
+      {
+        parentFound = setAccordion(parentPos, rank, true, false);
+      }
+      while(parentFound);
     }
-    while(parentFound);
     
     //show
     if (rank <= (parentTR.attr("rank") - 0))
