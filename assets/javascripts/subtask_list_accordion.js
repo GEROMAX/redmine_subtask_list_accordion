@@ -15,18 +15,20 @@ function getParentIssue(startPos, rank, sameTreeOnly)
   var issuesSelector = "table.list > tbody > tr";
   var rankAttr = rank <= 0 ? ":not(.idnt)" : "tr.idnt-" + rank;
   var nextAttr = "tr.idnt-" + (rank + 1 - 0);
-  var selectorP = ":gt(" + startPos.val + ")" + rankAttr;
+  var selectorP = startPos.val > 0 ? ":gt(" + startPos.val + ")" + rankAttr : rankAttr;
   var selectorC = nextAttr + ":first";
   var pp = $(issuesSelector + selectorP + " + " + selectorC);
+
   if (pp.size() != 1)
   {
     return $();
   }
   
-  //get parent
+  //get parent  
   startPos.val = pp.index() - 1;
+  
   return slaTRs.filter(function(index){ 
-    return index == pp.index() - 1; 
+    return index == startPos.val;
   });
 }
 
@@ -65,7 +67,7 @@ function getChildIssues(startPos, rank)
       break;
     }
   }
-  while (cc < slaTRsSize)
+  while (cc < slaTRsSize);
   
   startPos.val = endIdx;
   return slaTRs.filter(function(index){ return index >= startIdx && index <= endIdx; });
@@ -96,7 +98,7 @@ function childIssueShowOrHide(parentTR)
 
 function setAccordion(parentPos, rank, isHiding, sameTreeOnly)
 {
-  var parentTR = getParentIssue(parentPos, rank, sameTreeOnly);
+  var parentTR = getParentIssue(parentPos, rank, sameTreeOnly);  
   if (parentTR.size() != 1)
   {
     return false;
