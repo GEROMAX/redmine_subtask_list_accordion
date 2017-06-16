@@ -1,63 +1,13 @@
 <% if has_grandson_issues?(@issue) %>
-  <%= stylesheet_link_tag "subtask_list_accordion", :plugin => "redmine_subtask_list_accordion" %>
-  <%= javascript_include_tag "subtask_list_accordion", :plugin => "redmine_subtask_list_accordion" %>
+  <%= content_for :header_tags do
+    stylesheet_link_tag("subtask_list_accordion", :plugin => "redmine_subtask_list_accordion") +
+    javascript_include_tag("subtask_list_accordion", :plugin => "redmine_subtask_list_accordion")
+  end %>
   <div class="accordion_control contextual">
     <a href="javascript:void(0)" class="subtask_all_expand"><%= l(:list_all_expand) %></a>
     <a href="javascript:void(0)" class="subtask_all_collapse"><%= l(:list_all_collapse) %></a>
   </div>
   <script>
-    $(document).ready(function()
-    {
-      //make rank first time
-      slaTRs = $("table.list > tbody > tr");
-      slaTRsSize = slaTRs.size();
-      var analyzeTo = (<%= expand_tree_at_first?(@issue, User.current) %> == true) ? 10 : 1;
-      var isHiding = (<%= expand_tree_at_first?(@issue, User.current) %> == true) ? false : true;
-      var isSameTreeOnly = (<%= expand_tree_at_first?(@issue, User.current) %> == true) ? false : true;
-      for (var rank = 0; rank < analyzeTo; rank++)
-      {
-        var parentPos = { val: 0 };
-        var parentFound = false;
-        do
-        {
-          parentFound = setAccordion(parentPos, rank, isHiding, isSameTreeOnly);
-        }
-        while(parentFound);
-      }
-      
-      //all expand
-      $("a.subtask_all_expand").one("click", function(){
-        for (var rank = 1; rank < 10; rank++)
-        {
-          var parentPos = { val: 0 };
-          var parentFound = false;
-          do
-          {
-            parentFound = setAccordion(parentPos, rank, false, false);
-          }
-          while(parentFound);
-        }
-      }).click(function(){
-        slaTRs.show().filter(".haschild").removeClass("collapse").addClass("expand");
-        
-        //for debug
-        if (slaTRs.filter("tr:visible").size() != slaTRsSize)
-        {
-          alert("NG");
-        }
-        
-        return false;
-      });
-      
-      //all collapese
-      $("a.subtask_all_collapse").click(function(){
-        slaTRs.filter(".idnt").hide();
-        slaTRs.filter(".haschild").removeClass("expand").addClass("collapse");
-        return false;
-      });
-      
-      //link move
-      $("div.accordion_control").insertAfter("#issue_tree > p");
-    });
+    window.subtaskListAccordionExpandTreeAtFirst = <%= expand_tree_at_first?(@issue, User.current) %>;
   </script>
 <% end %>
