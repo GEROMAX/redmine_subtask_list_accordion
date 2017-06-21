@@ -1,7 +1,6 @@
 require "subtask_list_accordion_hook"
 
 Rails.configuration.to_prepare do
-  SubtaskListAccordionHelperPatch.apply
   SubtaskListAccordionUserPreferencePatch.apply
 end
 

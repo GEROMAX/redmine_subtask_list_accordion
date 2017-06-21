@@ -1,4 +1,4 @@
-<% if has_grandson_issues?(@issue) %>
+<% if SubtaskListAccordion.has_grandson_issues?(@issue) %>
   <%= content_for :header_tags do
     stylesheet_link_tag("subtask_list_accordion", :plugin => "redmine_subtask_list_accordion") +
     javascript_include_tag("subtask_list_accordion", :plugin => "redmine_subtask_list_accordion")
@@ -8,6 +8,6 @@
     <a href="javascript:void(0)" class="subtask_all_collapse"><%= l(:list_all_collapse) %></a>
   </div>
   <script>
-    window.subtaskListAccordionExpandTreeAtFirst = <%= expand_tree_at_first?(@issue, User.current) %>;
+    window.subtaskListAccordionExpandTreeAtFirst = <%= SubtaskListAccordion.expand_tree_at_first?(@issue, User.current) %>;
   </script>
 <% end %>
