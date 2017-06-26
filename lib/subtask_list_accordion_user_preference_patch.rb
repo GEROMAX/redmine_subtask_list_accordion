@@ -4,7 +4,7 @@ module SubtaskListAccordionUserPreferencePatch
   end
 
   def subtasks_default_expand_limit_upper
-    (self[:subtasks_default_expand_limit_upper] || 10).to_i
+    (self[:subtasks_default_expand_limit_upper] || 0).to_i
   end
 
   def subtasks_default_expand_limit_upper=(val)
