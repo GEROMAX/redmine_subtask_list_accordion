@@ -11,3 +11,26 @@
     window.subtaskListAccordionExpandTreeAtFirst = <%= expand_tree_at_first?(@issue, User.current) %>;
   </script>
 <% end %>
+<script>
+  //control context-menu of this plugin 
+  $(document).ready(function(){
+    //wrap contextMenuShow
+    var _contextMenuShow = contextMenuShow;
+    isHideMenuSla = false;
+    contextMenuShow = function(event){
+      if ($(event.target).parents("div[id='relations']").size() == 1)
+      {
+        //hide this plugin menu
+        isHideMenuSla = true;
+      }
+      _contextMenuShow(event);
+    }
+    $(document).ajaxComplete(function(){
+      if (isHideMenuSla)
+      {
+        $("#context-menu > ul > li.subtask_list_accordion").css("display", "none");
+        isHideMenuSla = false;
+      }
+    });
+  });
+</script>
