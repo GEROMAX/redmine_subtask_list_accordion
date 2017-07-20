@@ -1,6 +1,9 @@
-require_dependency "subtask_list_accordion_hook"
-require_dependency "subtask_list_accordion_helper_patch"
-require_dependency "subtask_list_accordion_controller_patch"
+require "subtask_list_accordion_hook"
+require "subtask_list_accordion_helper_patch"
+
+Rails.configuration.to_prepare do
+  SubtaskListAccordionUserPreferencePatch.apply
+end
 
 Redmine::Plugin.register :redmine_subtask_list_accordion do
   name 'Redmine Subtask List Accordion plugin'

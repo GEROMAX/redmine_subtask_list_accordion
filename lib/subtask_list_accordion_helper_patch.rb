@@ -13,7 +13,7 @@ module SubtaskListAccordionHelperPatch
 
   module InstanceMethod
     def def_expand_tree_at_first?(issue, user)
-      if issue.descendants.visible.count <= user.subtasks_default_expand_limit_upper
+      if issue.descendants.visible.count <= user.pref.subtasks_default_expand_limit_upper
         return true
       else
         return false
