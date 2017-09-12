@@ -1,5 +1,5 @@
-require "subtask_list_accordion_hook"
-require "subtask_list_accordion_helper_patch"
+require_dependency 'redmine_subtask_list_accordion/hooks/subtask_list_accordion_hook'
+require_dependency 'redmine_subtask_list_accordion/patches/subtask_list_accordion_helper_patch'
 require_dependency 'redmine_subtask_list_accordion/patches/user_preference_patch'
 
 ActionDispatch::Callbacks.to_prepare do
