@@ -1,8 +1,11 @@
 require "subtask_list_accordion_hook"
 require "subtask_list_accordion_helper_patch"
+require_dependency 'redmine_subtask_list_accordion/patches/user_preference_patch'
 
-Rails.configuration.to_prepare do
-  SubtaskListAccordionUserPreferencePatch.apply
+ActionDispatch::Callbacks.to_prepare do
+  unless UserPreference.included_modules.include?(RedmineSubtaskListAccordion::Patches::UserPreferencePatch)
+    UserPreference.send :prepend, RedmineSubtaskListAccordion::Patches::UserPreferencePatch
+  end
 end
 
 Redmine::Plugin.register :redmine_subtask_list_accordion do
