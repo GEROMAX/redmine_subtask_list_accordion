@@ -5,3 +5,4 @@ fr:
   context_menu_expand: "Ouvrir l'arborescence"
   context_menu_collapse: "Fermer l'arborescence"
   context_menu_all_expand_next: "Ouvrir le niveau suivant"
+  field_subtasks_default_expand_limit_upper: "Upper limit of child issues to tree expanding from the first time"

@@ -15,18 +15,20 @@ function getParentIssue(startPos, rank, sameTreeOnly)
   var issuesSelector = "table.list > tbody > tr";
   var rankAttr = rank <= 0 ? ":not(.idnt)" : "tr.idnt-" + rank;
   var nextAttr = "tr.idnt-" + (rank + 1 - 0);
-  var selectorP = ":gt(" + startPos.val + ")" + rankAttr;
+  var selectorP = (startPos.val + rank) > 0 ? ":gt(" + startPos.val + ")" + rankAttr : rankAttr;
   var selectorC = nextAttr + ":first";
   var pp = $(issuesSelector + selectorP + " + " + selectorC);
+
   if (pp.size() != 1)
   {
+    //no parent
     return $();
   }
-  
+
   //get parent
   startPos.val = pp.index() - 1;
   return slaTRs.filter(function(index){ 
-    return index == pp.index() - 1; 
+    return index == startPos.val;
   });
 }
 
@@ -65,7 +67,7 @@ function getChildIssues(startPos, rank)
       break;
     }
   }
-  while (cc < slaTRsSize)
+  while (cc < slaTRsSize);
   
   startPos.val = endIdx;
   return slaTRs.filter(function(index){ return index >= startIdx && index <= endIdx; });
@@ -208,13 +210,16 @@ function allExpandNext()
   //make rank
   for (var rank = 0; rank <= (parentTR.attr("rank") - 0 + 1); rank++)
   {
-    var parentFound = false;
-    var parentPos = { val: 0 };
-    do
+    if (rank > 0)
     {
-      parentFound = setAccordion(parentPos, rank, true, false);
+      var parentFound = false;
+      var parentPos = { val: 0 };
+      do
+      {
+        parentFound = setAccordion(parentPos, rank, true, false);
+      }
+      while(parentFound);
     }
-    while(parentFound);
     
     //show
     if (rank <= (parentTR.attr("rank") - 0))
@@ -225,3 +230,59 @@ function allExpandNext()
     }
   }
 }
+
+$(document).ready(function()
+{
+  var expandTreeAtFirst = window.subtaskListAccordionExpandTreeAtFirst;
+  //make rank first time
+  slaTRs = $("table.list > tbody > tr");
+  slaTRsSize = slaTRs.size();
+  var analyzeTo = expandTreeAtFirst ? 10 : 1;
+  var isHiding = !expandTreeAtFirst;
+  var isSameTreeOnly = isHiding;
+
+  for (var rank = 0; rank < analyzeTo; rank++)
+  {
+    var parentPos = { val: 0 };
+    var parentFound = false;
+    do
+    {
+      parentFound = setAccordion(parentPos, rank, isHiding, isSameTreeOnly);
+    }
+    while(parentFound);
+  }
+  
+  //all expand
+  $("a.subtask_all_expand").one("click", function(){
+    for (var rank = 1; rank < 10; rank++)
+    {
+      var parentPos = { val: 0 };
+      var parentFound = false;
+      do
+      {
+        parentFound = setAccordion(parentPos, rank, false, false);
+      }
+      while(parentFound);
+    }
+  }).click(function(){
+    slaTRs.show().filter(".haschild").removeClass("collapse").addClass("expand");
+    
+    //for debug
+    if (slaTRs.filter("tr:visible").size() != slaTRsSize)
+    {
+      alert("NG");
+    }
+    
+    return false;
+  });
+  
+  //all collapese
+  $("a.subtask_all_collapse").click(function(){
+    slaTRs.filter(".idnt").hide();
+    slaTRs.filter(".haschild").removeClass("expand").addClass("collapse");
+    return false;
+  });
+  
+  //link move
+  $("div.accordion_control").insertAfter("#issue_tree > p");
+});

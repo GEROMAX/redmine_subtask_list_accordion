@@ -1,55 +1,36 @@
-<%= stylesheet_link_tag "subtask_list_accordion", :plugin => "redmine_subtask_list_accordion" %>
-<%= javascript_include_tag "subtask_list_accordion", :plugin => "redmine_subtask_list_accordion" %>
-<div class="accordion_control contextual">
-  <a href="javascript:void(0)" class="subtask_all_expand"><%= l(:list_all_expand) %></a>
-  <a href="javascript:void(0)" class="subtask_all_collapse"><%= l(:list_all_collapse) %></a>
-</div>
+<% if has_grandson_issues?(@issue) %>
+  <%= content_for :header_tags do
+    stylesheet_link_tag("subtask_list_accordion", :plugin => "redmine_subtask_list_accordion") +
+    javascript_include_tag("subtask_list_accordion", :plugin => "redmine_subtask_list_accordion")
+  end %>
+  <div class="accordion_control contextual">
+    <a href="javascript:void(0)" class="subtask_all_expand"><%= l(:list_all_expand) %></a>
+    <a href="javascript:void(0)" class="subtask_all_collapse"><%= l(:list_all_collapse) %></a>
+  </div>
+  <script>
+    window.subtaskListAccordionExpandTreeAtFirst = <%= expand_tree_at_first?(@issue, User.current) %>;
+  </script>
+<% end %>
 <script>
-  $(document).ready(function()
-  {
-    //make first rank
-    slaTRs = $("table.list > tbody > tr");
-    slaTRsSize = slaTRs.size();
-    var parentPos = { val: 0 };
-    var parentFound;
-    do
-    {
-      parentFound = setAccordion(parentPos, 0, true, true);
+  //control context-menu of this plugin 
+  $(document).ready(function(){
+    //wrap contextMenuShow
+    var _contextMenuShow = contextMenuShow;
+    isHideMenuSla = false;
+    contextMenuShow = function(event){
+      if ($(event.target).parents("div[id='relations']").size() == 1)
+      {
+        //hide this plugin menu
+        isHideMenuSla = true;
+      }
+      _contextMenuShow(event);
     }
-    while(parentFound);
-    
-    //all expand
-    $("a.subtask_all_expand").one("click", function(){
-      for (var rank = 1; rank < 10; rank++)
+    $(document).ajaxComplete(function(){
+      if (isHideMenuSla)
       {
-        var parentPos = { val: 0 };
-        var parentFound = false;
-        do
-        {
-          parentFound = setAccordion(parentPos, rank, false, false);
-        }
-        while(parentFound);
+        $("#context-menu > ul > li.subtask_list_accordion").css("display", "none");
+        isHideMenuSla = false;
       }
-    }).click(function(){
-      slaTRs.show().filter(".haschild").removeClass("collapse").addClass("expand");
-      
-      //for debug
-      if (slaTRs.filter("tr:visible").size() != slaTRsSize)
-      {
-        alert("NG");
-      }
-      
-      return false;
     });
-    
-    //all collapese
-    $("a.subtask_all_collapse").click(function(){
-      slaTRs.filter(".idnt").hide();
-      slaTRs.filter(".haschild").removeClass("expand").addClass("collapse");
-      return false;
-    });
-    
-    //link move
-    $("div.accordion_control").insertAfter("#issue_tree > p");
   });
 </script>

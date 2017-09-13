@@ -2,17 +2,21 @@
 
 This plugin provide accordion to subtask list of issue.
 
+* http://www.redmine.org/plugins/redmine_subtask_list_accordion
+
 ## Features
 
 * Add accordion feature to subtask-list.
 * Add function 'Expand this tree', 'Collapse this tree' and 'Expand next level all' to context-menu.
+* Add preferences of expand tree at first time.
 
 ## Compatibility
 
-Redmine 3.3 stable
+Redmine 3.3 or 3.4 stable
 
 Tested on:
-* 3.3.2
+* 3.3.3
+* 3.4.2
 
 ## Installation
 

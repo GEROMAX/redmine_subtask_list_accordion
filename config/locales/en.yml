@@ -1,7 +1,8 @@
 # English strings go here for Rails i18n
 en:
-  list_all_expand: "All Expand"
-  list_all_collapse: "All Collapse"
+  list_all_expand: "Expand All"
+  list_all_collapse: "Collapse All"
   context_menu_expand: "Expand this tree"
   context_menu_collapse: "Collapse this tree"
   context_menu_all_expand_next: "Expand next level all"
+  field_subtasks_default_expand_limit_upper: "Upper limit of child issues to tree expanding from the first time"
