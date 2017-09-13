@@ -1,10 +1,14 @@
 require_dependency 'redmine_subtask_list_accordion/hooks/subtask_list_accordion_hook'
-require_dependency 'redmine_subtask_list_accordion/patches/subtask_list_accordion_helper_patch'
+require_dependency 'redmine_subtask_list_accordion/patches/issues_helper_patch'
 require_dependency 'redmine_subtask_list_accordion/patches/user_preference_patch'
 
 ActionDispatch::Callbacks.to_prepare do
   unless UserPreference.included_modules.include?(RedmineSubtaskListAccordion::Patches::UserPreferencePatch)
     UserPreference.send :prepend, RedmineSubtaskListAccordion::Patches::UserPreferencePatch
+  end
+
+  unless IssuesHelper.included_modules.include?(RedmineSubtaskListAccordion::Patches::IssuesHelperPatch)
+    IssuesHelper.send :prepend, RedmineSubtaskListAccordion::Patches::IssuesHelperPatch
   end
 end
 
