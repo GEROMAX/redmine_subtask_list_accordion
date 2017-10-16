@@ -8,7 +8,7 @@ ActionDispatch::Callbacks.to_prepare do
   end
 
   unless IssuesHelper.included_modules.include?(RedmineSubtaskListAccordion::Patches::IssuesHelperPatch)
-    IssuesHelper.send :prepend, RedmineSubtaskListAccordion::Patches::IssuesHelperPatch
+    IssuesHelper.send :include, RedmineSubtaskListAccordion::Patches::IssuesHelperPatch
   end
 end
 
