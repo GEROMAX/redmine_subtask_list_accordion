@@ -6,8 +6,13 @@ module RedmineSubtaskListAccordion
       extend ActiveSupport::Concern
 
       #wrap original method
-      alias_method :original_render_descendants_tree, :render_descendants_tree
-      alias_method :render_descendants_tree, :switch_render_descendants_tree
+      def self.included(base)
+        base.class_eval do
+          alias_method :original_render_descendants_tree, :render_descendants_tree
+          alias_method :render_descendants_tree, :switch_render_descendants_tree
+        end
+      end
+
       def switch_render_descendants_tree(issue)
         if has_grandson_issues?(issue)
           render_descendants_tree_accordion(issue)
@@ -15,6 +20,8 @@ module RedmineSubtaskListAccordion
           original_render_descendants_tree(issue)
         end
       end
+
+      # add method to IssuesHelper
       def render_descendants_tree_accordion(issue)
         s = '<span>NEW!</span><table class="list issues odd-even">'
         issue_list(issue.descendants.visible.preload(:status, :priority, :tracker, :assigned_to).sort_by(&:lft)) do |child, level|
@@ -32,7 +39,6 @@ module RedmineSubtaskListAccordion
         s.html_safe
       end
 
-      # add method to IssuesHelper
       def expand_tree_at_first?(issue, user)
         return issue.descendants.visible.count <= user.pref.subtasks_default_expand_limit_upper
       end
