@@ -1,3 +1,4 @@
+/*
 function getParentIssue(startPos, rank, sameTreeOnly)
 {
   if (sameTreeOnly)
@@ -77,6 +78,7 @@ function addRangeIndex(parentTR, childlen, rank)
 {
   parentTR.attr('cs', childlen.filter("tr:first").index()).attr('ce', childlen.filter("tr:last").index()).attr('rank', rank);
 }
+*/
 
 function childIssueShowOrHide(parentTR)
 {
@@ -96,6 +98,7 @@ function childIssueShowOrHide(parentTR)
   }
 }
 
+/*
 function setAccordion(parentPos, rank, isHiding, sameTreeOnly)
 {
   var parentTR = getParentIssue(parentPos, rank, sameTreeOnly);
@@ -141,6 +144,7 @@ function setAccordion(parentPos, rank, isHiding, sameTreeOnly)
   //do next
   return true;
 }
+*/
 
 function seletedTreeOpen()
 {
@@ -153,6 +157,7 @@ function seletedTreeOpen()
       continue;
     }
     
+    /*    
     //make rank
     for (var rank = (parentTR.attr("rank") - 0 + 1); rank < 10; rank++)
     {
@@ -165,7 +170,8 @@ function seletedTreeOpen()
       }
       while(parentFound && parentPos.val < (parentTR.attr('ce') - 0));
     }
-    
+    */
+
     //show
     var childlen = slaTRs.filter(function(index){ 
       return index >= (parentTR.attr('cs') - 0) && index <= (parentTR.attr('ce') - 0); 
@@ -208,8 +214,9 @@ function allExpandNext()
   }
   
   //make rank
-  for (var rank = 0; rank <= (parentTR.attr("rank") - 0 + 1); rank++)
+  for (var rank = 0; rank <= (parentTR.attr("rank") - 0); rank++)
   {
+    /*
     if (rank > 0)
     {
       var parentFound = false;
@@ -220,27 +227,38 @@ function allExpandNext()
       }
       while(parentFound);
     }
+    */
     
     //show
-    if (rank <= (parentTR.attr("rank") - 0))
-    {
-      slaTRs.filter("tr[rank='" + rank + "'].haschild.collapse").each(function(){
-        childIssueShowOrHide($(this));
-      });
-    }
+    slaTRs.filter("tr[rank='" + rank + "'].haschild.collapse").each(function(){
+      childIssueShowOrHide($(this));
+    });
   }
 }
 
 $(document).ready(function()
 {
-  var expandTreeAtFirst = window.subtaskListAccordionExpandTreeAtFirst;
-  //make rank first time
+  //var expandTreeAtFirst = window.subtaskListAccordionExpandTreeAtFirst;
+
+  //set click event
   slaTRs = $("table.list > tbody > tr");
   slaTRsSize = slaTRs.size();
+  slaTRs.find("td.subject > span.treearrow").click(function()
+  {
+    childIssueShowOrHide($(this).parent().parent());
+    return false;
+  });
+
+  //make rank first time  
+  //slaTRs = $("table.list > tbody > tr");
+
+  /*
   var analyzeTo = expandTreeAtFirst ? 10 : 1;
   var isHiding = !expandTreeAtFirst;
   var isSameTreeOnly = isHiding;
+  */
 
+  /*
   for (var rank = 0; rank < analyzeTo; rank++)
   {
     var parentPos = { val: 0 };
@@ -251,9 +269,11 @@ $(document).ready(function()
     }
     while(parentFound);
   }
+  */
   
   //all expand
   $("a.subtask_all_expand").one("click", function(){
+    /*
     for (var rank = 1; rank < 10; rank++)
     {
       var parentPos = { val: 0 };
@@ -264,11 +284,12 @@ $(document).ready(function()
       }
       while(parentFound);
     }
+    */
   }).click(function(){
     slaTRs.show().filter(".haschild").removeClass("collapse").addClass("expand");
     
     //for debug
-    if (slaTRs.filter("tr:visible").size() != slaTRsSize)
+    if (slaTRs.filter("tr:visible").size() != slaTRs.size())
     {
       alert("NG");
     }
