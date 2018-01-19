@@ -25,7 +25,7 @@ module RedmineSubtaskListAccordion
       # add method to IssuesHelper
       def render_descendants_tree_accordion(issue)
         trIdx = 0
-        s = '<span>NEW!</span><table class="list issues odd-even">'
+        s = '<table class="list issues odd-even">'
         issue_list(issue.descendants.visible.preload(:status, :priority, :tracker, :assigned_to).sort_by(&:lft)) do |child, level|
           arrow = (child.descendants.visible.count > 0 ? content_tag('span', '', :class => 'treearrow') : ''.html_safe)
           css = "issue issue-#{child.id} hascontextmenu #{child.css_classes}"
