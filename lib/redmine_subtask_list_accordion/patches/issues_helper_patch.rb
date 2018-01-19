@@ -13,6 +13,7 @@ module RedmineSubtaskListAccordion
         end
       end
 
+      #switch by enable condition
       def switch_render_descendants_tree(issue)
         if has_grandson_issues?(issue)
           render_descendants_tree_accordion(issue)
@@ -29,9 +30,9 @@ module RedmineSubtaskListAccordion
           arrow = (child.descendants.visible.count > 0 ? content_tag('span', '', :class => 'treearrow') : ''.html_safe)
           css = "issue issue-#{child.id} hascontextmenu #{child.css_classes}"
           css << " haschild" if child.children?
-          css << (expand_tree_at_first?(issue, User.current) ? " expand" : " collapse")
+          css << (expand_tree_at_first?(issue) ? " expand" : " collapse")
           css << " idnt idnt-#{level}" if level > 0
-          hide_or_show = 'display: none;' unless level <= 0 || expand_tree_at_first?(issue, User.current)
+          hide_or_show = 'display: none;' unless level <= 0 || expand_tree_at_first?(issue)
           s << content_tag('tr',
                  content_tag('td', check_box_tag("ids[]", child.id, false, :id => nil), :class => 'checkbox') +
                  content_tag('td', arrow + link_to_issue(child, :project => (issue.project_id != child.project_id)), :class => 'subject', :style => 'width: 50%') +
@@ -44,8 +45,8 @@ module RedmineSubtaskListAccordion
         s.html_safe
       end
 
-      def expand_tree_at_first?(issue, user)
-        return issue.descendants.visible.count <= user.pref.subtasks_default_expand_limit_upper
+      def expand_tree_at_first?(issue)
+        return issue.descendants.visible.count <= User.current.pref.subtasks_default_expand_limit_upper
       end
 
       def has_grandson_issues?(issue)
