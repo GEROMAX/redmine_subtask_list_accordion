@@ -6,3 +6,4 @@ en:
   context_menu_collapse: "Collapse this tree"
   context_menu_all_expand_next: "Expand next level all"
   field_subtasks_default_expand_limit_upper: "Upper limit of child issues to tree expanding from the first time"
+  label_enable_server_scripting_mode: "Enable server scripting mode(Has many subtasks tree display more than faster, but tradeoff other subtask's plugin. for exsample 'subtask_list_columns' plugin)"
