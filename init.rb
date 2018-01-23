@@ -20,5 +20,5 @@ Redmine::Plugin.register :redmine_subtask_list_accordion do
   version '1.3.3'
   url 'https://github.com/GEROMAX/redmine_subtask_list_accordion'
   author_url 'https://github.com/GEROMAX'
-  settings :default => { enable_server_scripting_mode: false }, :partial => 'settings/settings'
+  settings :default => { enable_server_scripting_mode: false }, :partial => 'redmine_subtask_list_accordion/settings'
 end
