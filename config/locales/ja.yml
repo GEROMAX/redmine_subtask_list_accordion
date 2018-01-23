@@ -6,4 +6,4 @@ ja:
   context_menu_collapse: "このツリーを収縮"
   context_menu_all_expand_next: "この階層をすべて展開"
   field_subtasks_default_expand_limit_upper: "デフォルトでツリーを展開する時の子チケット数上限"
-  label_enable_server_scripting_mode: "サーバー処理モードを有効にする(小孫チケットが大量にある時のツリー表示が早くなりますが、子チケット一覧に関する他のプラグインとは共存できなくなります。 例 'subtask_list_columns'プラグイン)"
+  label_enable_server_scripting_mode: "サーバー処理モードを有効にする (小孫チケットが大量にある時のツリー表示が早くなりますが、子チケット一覧に関する他のプラグインとは共存できなくなります。 例 'subtask_list_columns' プラグイン)"
