@@ -6,4 +6,4 @@ fr:
   context_menu_collapse: "Fermer l'arborescence"
   context_menu_all_expand_next: "Ouvrir le niveau suivant"
   field_subtasks_default_expand_limit_upper: "Upper limit of child issues to tree expanding from the first time"
-  label_enable_server_scripting_mode: "Enable server scripting mode (Has many subtasks tree display more than faster, but tradeoff other subtask's plugin. for exsample 'subtask_list_columns' plugin)"
+  label_enable_server_scripting_mode: "Enable server processing mode (Has many subtasks tree display more than faster, but tradeoff other subtask's plugin. for exsample 'subtask_list_columns' plugin)"
