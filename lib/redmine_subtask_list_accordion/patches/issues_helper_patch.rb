@@ -8,18 +8,21 @@ module RedmineSubtaskListAccordion
       #wrap original method
       def self.included(base)
         base.class_eval do
-          alias_method :original_render_descendants_tree, :render_descendants_tree
+          alias_method :render_descendants_tree_original, :render_descendants_tree
           alias_method :render_descendants_tree, :switch_render_descendants_tree
         end
       end
 
       #switch by enable condition
       def switch_render_descendants_tree(issue)
-        if has_grandson_issues?(issue)
-          render_descendants_tree_accordion(issue)
-        else
-          original_render_descendants_tree(issue)
-        end
+        render_descendants_tree_accordion(issue) if has_grandson_issues?(issue) && !subtask_tree_client_processing?
+        render_descendants_tree_original(issue)
+
+        # if has_grandson_issues?(issue)
+        #   render_descendants_tree_accordion(issue)
+        # else
+        #   render_descendants_tree_original(issue)
+        # end
       end
 
       # add method to IssuesHelper
@@ -51,6 +54,10 @@ module RedmineSubtaskListAccordion
 
       def has_grandson_issues?(issue)
         return issue.descendants.visible.where(["issues.parent_id <> ?", issue.id]).count > 0
+      end
+
+      def subtask_tree_client_processing?
+        return !Setting.plugin_redmine_subtask_list_accordion['enable_server_scripting_mode']
       end
 
     end
