@@ -20,12 +20,6 @@ module RedmineSubtaskListAccordion
         else
           render_descendants_tree_original(issue)
         end
-
-        # if has_grandson_issues?(issue)
-        #   render_descendants_tree_accordion(issue)
-        # else
-        #   render_descendants_tree_original(issue)
-        # end
       end
 
       # add method to IssuesHelper
