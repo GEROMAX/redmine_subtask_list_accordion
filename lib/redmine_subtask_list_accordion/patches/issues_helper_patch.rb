@@ -15,8 +15,11 @@ module RedmineSubtaskListAccordion
 
       #switch by enable condition
       def switch_render_descendants_tree(issue)
-        render_descendants_tree_accordion(issue) if has_grandson_issues?(issue) && !subtask_tree_client_processing?
-        render_descendants_tree_original(issue)
+        if has_grandson_issues?(issue) &&  !subtask_tree_client_processing?
+          render_descendants_tree_accordion(issue)
+        else
+          render_descendants_tree_original(issue)
+        end
 
         # if has_grandson_issues?(issue)
         #   render_descendants_tree_accordion(issue)

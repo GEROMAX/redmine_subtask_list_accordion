@@ -9,7 +9,7 @@
   </div>
   <% if subtask_tree_client_processing? %>
   <script>
-    window.subtaskListAccordionExpandTreeAtFirst = <%= expand_tree_at_first?(@issue, User.current) %>;
+    window.subtaskListAccordionExpandTreeAtFirst = <%= expand_tree_at_first?(@issue) %>;
   </script>
   <% end %>
 <% end %>
