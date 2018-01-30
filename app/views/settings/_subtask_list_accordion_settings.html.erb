@@ -1,4 +1,4 @@
 <div>
-  <%= check_box_tag 'settings[enable_server_scripting_mode]', true, !!Setting.plugin_redmine_subtask_list_accordion['enable_server_scripting_mode'] %>
+  <%= check_box_tag 'settings[enable_server_scripting_mode]', true, settings['enable_server_scripting_mode'] %>
   <%= l(:label_enable_server_scripting_mode).html_safe %>
 </div>
