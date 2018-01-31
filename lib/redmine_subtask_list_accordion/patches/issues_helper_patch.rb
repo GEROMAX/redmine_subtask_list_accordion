@@ -6,11 +6,9 @@ module RedmineSubtaskListAccordion
       extend ActiveSupport::Concern
 
       #wrap original method
-      def self.included(base)
-        base.class_eval do
-          alias_method :render_descendants_tree_original, :render_descendants_tree
-          alias_method :render_descendants_tree, :switch_render_descendants_tree
-        end
+      included do
+        alias_method :render_descendants_tree_original, :render_descendants_tree
+        alias_method :render_descendants_tree, :switch_render_descendants_tree
       end
 
       #switch by enable condition
