@@ -17,8 +17,8 @@ Server mode is faster than client mode, but server mode is tradeoff other subtas
 Redmine 3.3 or 3.4 stable
 
 Tested on:
-* 3.3.3
-* 3.4.2
+* 3.3.6
+* 3.4.4
 
 ## Installation
 
