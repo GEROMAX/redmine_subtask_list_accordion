@@ -9,14 +9,16 @@ This plugin provide accordion to subtask list of issue.
 * Add accordion feature to subtask-list.
 * Add function 'Expand this tree', 'Collapse this tree' and 'Expand next level all' to context-menu.
 * Add preferences of expand tree at first time.
+* Add plugin setting for server/client processing mode switch. (server mode default)  
+Server mode is faster than client mode, but server mode is tradeoff other subtask's plugin. (for exsample 'subtask_list_columns' plugin)
 
 ## Compatibility
 
 Redmine 3.3 or 3.4 stable
 
 Tested on:
-* 3.3.3
-* 3.4.2
+* 3.3.6
+* 3.4.4
 
 ## Installation
 
