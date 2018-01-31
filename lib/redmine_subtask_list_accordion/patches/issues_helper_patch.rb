@@ -23,8 +23,7 @@ module RedmineSubtaskListAccordion
       # add method to IssuesHelper
       def render_descendants_tree_accordion(issue)
         #Compatible 3.3 and 3.4
-        threshold = [3,3,5]
-        s = ((Redmine::VERSION.to_a[0, 3] <=> threshold) <= 0 ? '<form>' : '')
+        s = (subtask_list_accordion_tree_render_33? ? '<form>' : '')
         s << '<table class="list issues odd-even">'
         trIdx = 0
         issue_list(issue.descendants.visible.preload(:status, :priority, :tracker, :assigned_to).sort_by(&:lft)) do |child, level|
@@ -43,7 +42,7 @@ module RedmineSubtaskListAccordion
                  :class => css, :cs => (trIdx+=1).to_s, :ce => (trIdx + child.descendants.visible.count - 1).to_s, :rank => level.to_s, :style => hide_or_show)
         end
         s << '</table>'
-        s << ((Redmine::VERSION.to_a[0, 3] <=> threshold) <= 0 ? '</form>' : '')
+        s << (subtask_list_accordion_tree_render_33? ? '</form>' : '')
         s.html_safe
       end
 
@@ -57,6 +56,11 @@ module RedmineSubtaskListAccordion
 
       def subtask_tree_client_processing?
         return !Setting.plugin_redmine_subtask_list_accordion['enable_server_scripting_mode']
+      end
+
+      def subtask_list_accordion_tree_render_33?
+        threshold = [3,4,0]
+        return (Redmine::VERSION.to_a[0, 3] <=> threshold) < 0
       end
 
     end
