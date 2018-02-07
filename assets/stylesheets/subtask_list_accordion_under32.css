@@ -1,0 +1,63 @@
+#issue_tree > p {
+  margin-bottom: 5px;
+}
+
+.contextual.accordion_control {
+  float: left;
+  margin-bottom: 5px;
+  padding: 2px 7px 2px 2px;
+}
+
+.accordion_control a {
+  background-position: 0 50%;
+  background-repeat: no-repeat;
+  padding-bottom: 3px;
+  padding-left: 20px;
+  padding-top: 2px;
+}
+
+.accordion_control a.subtask_all_expand {
+  background-image: url(../../../images/arrow_expanded.png);
+}
+
+.accordion_control a.subtask_all_collapse {
+  background-image: url(../../../images/arrow_collapsed.png);
+}
+
+tr.issue.idnt td.subject a {
+  background: none;
+  padding-left: 0px;
+}
+
+tr.issue:not(.idnt):not(.haschild) td.subject a {
+  margin-left: 16px;
+}
+
+tr.issue.idnt:not(.haschild) td.subject a {
+  margin-left: 32px;
+}
+
+tr.issue.haschild > td.subject > span.treearrow {
+  cursor: pointer;
+}
+
+tr.issue.haschild:not(.idnt) > td.subject > span.treearrow {
+  padding-left: 16px;
+}
+
+tr.issue.haschild.idnt > td.subject > span.treearrow {
+  margin-left: 16px;
+  padding-left: 16px;
+}
+
+tr.issue.haschild.collapse > td.subject > span.treearrow {
+  background: url(../../../images/arrow_collapsed.png) no-repeat right bottom;
+}
+
+tr.issue.haschild.expand > td.subject > span.treearrow {
+  background: url(../../../images/arrow_expanded.png) no-repeat right bottom;
+}
+
+.icon-arrow-expanded { background-image: url(../../../images/arrow_expanded.png); }
+
+.icon-arrow-collapsed { background-image: url(../../../images/arrow_collapsed.png); }
