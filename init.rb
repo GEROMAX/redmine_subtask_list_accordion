@@ -17,7 +17,7 @@ Redmine::Plugin.register :redmine_subtask_list_accordion do
   name 'Redmine Subtask List Accordion plugin'
   author 'Ryuta Tobita'
   description 'This plugin provide accordion to subtask list of issue.'
-  version '2.0.0'
+  version '2.1.0'
   url 'https://github.com/GEROMAX/redmine_subtask_list_accordion'
   author_url 'https://github.com/GEROMAX'
   settings default: { 'enable_server_scripting_mode' => true }, :partial => 'settings/subtask_list_accordion_settings'
