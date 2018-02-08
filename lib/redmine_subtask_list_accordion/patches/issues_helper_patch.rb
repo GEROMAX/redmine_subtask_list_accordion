@@ -22,28 +22,48 @@ module RedmineSubtaskListAccordion
 
       # add method to IssuesHelper
       def render_descendants_tree_accordion(issue)
-        #Compatible 3.3 and 3.4
-        s = (subtask_list_accordion_tree_render_33? ? '<form>' : '')
-        s << '<table class="list issues odd-even">'
         trIdx = 0
-        issue_list(issue.descendants.visible.preload(:status, :priority, :tracker, :assigned_to).sort_by(&:lft)) do |child, level|
-          arrow = (child.descendants.visible.count > 0 ? content_tag('span', '', :class => 'treearrow') : ''.html_safe)
-          css = "issue issue-#{child.id} hascontextmenu #{child.css_classes}"
-          css << " haschild" if child.children?
-          css << (expand_tree_at_first?(issue) ? " expand" : " collapse")
-          css << " idnt idnt-#{level}" if level > 0
-          hide_or_show = 'display: none;' unless level <= 0 || expand_tree_at_first?(issue)
-          s << content_tag('tr',
-                 content_tag('td', check_box_tag("ids[]", child.id, false, :id => nil), :class => 'checkbox') +
-                 content_tag('td', arrow + link_to_issue(child, :project => (issue.project_id != child.project_id)), :class => 'subject', :style => 'width: 50%') +
-                 content_tag('td', h(child.status), :class => 'status') +
-                 content_tag('td', link_to_user(child.assigned_to), :class => 'assigned_to') +
-                 content_tag('td', child.disabled_core_fields.include?('done_ratio') ? '' : progress_bar(child.done_ratio), :class=> 'done_ratio'),
-                 :class => css, :cs => (trIdx+=1).to_s, :ce => (trIdx + child.descendants.visible.count - 1).to_s, :rank => level.to_s, :style => hide_or_show)
+        #switch under 3.2 or higher
+        if subtask_list_accordion_tree_render_32?
+          s = '<form><table class="list issues">'
+          issue_list(issue.descendants.visible.preload(:status, :priority, :tracker).sort_by(&:lft)) do |child, level|
+            arrow = (child.descendants.visible.count > 0 ? content_tag('span', '', :class => 'treearrow') : ''.html_safe)
+            css = "issue issue-#{child.id} hascontextmenu"
+            css << " haschild" if child.children?
+            css << (expand_tree_at_first?(issue) ? " expand" : " collapse")
+            css << " idnt idnt-#{level}" if level > 0
+            hide_or_show = 'display: none;' unless level <= 0 || expand_tree_at_first?(issue)
+            s << content_tag('tr',
+                  content_tag('td', check_box_tag("ids[]", child.id, false, :id => nil), :class => 'checkbox') +
+                  content_tag('td', arrow + link_to_issue(child, :project => (issue.project_id != child.project_id)), :class => 'subject', :style => 'width: 50%') +
+                  content_tag('td', h(child.status)) +
+                  content_tag('td', link_to_user(child.assigned_to)) +
+                  content_tag('td', child.disabled_core_fields.include?('done_ratio') ? '' : progress_bar(child.done_ratio)),
+                  :class => css, :cs => (trIdx+=1).to_s, :ce => (trIdx + child.descendants.visible.count - 1).to_s, :rank => level.to_s, :style => hide_or_show)
+          end
+          s << '</table></form>'
+          s.html_safe
+        else
+          s = '<table class="list issues odd-even">'
+          issue_list(issue.descendants.visible.preload(:status, :priority, :tracker, :assigned_to).sort_by(&:lft)) do |child, level|
+            arrow = (child.descendants.visible.count > 0 ? content_tag('span', '', :class => 'treearrow') : ''.html_safe)
+            css = "issue issue-#{child.id} hascontextmenu #{child.css_classes}"
+            css << " haschild" if child.children?
+            css << (expand_tree_at_first?(issue) ? " expand" : " collapse")
+            css << " idnt idnt-#{level}" if level > 0
+            hide_or_show = 'display: none;' unless level <= 0 || expand_tree_at_first?(issue)
+            s << content_tag('tr',
+                  content_tag('td', check_box_tag("ids[]", child.id, false, :id => nil), :class => 'checkbox') +
+                  content_tag('td', arrow + link_to_issue(child, :project => (issue.project_id != child.project_id)), :class => 'subject', :style => 'width: 50%') +
+                  content_tag('td', h(child.status), :class => 'status') +
+                  content_tag('td', link_to_user(child.assigned_to), :class => 'assigned_to') +
+                  content_tag('td', child.disabled_core_fields.include?('done_ratio') ? '' : progress_bar(child.done_ratio), :class=> 'done_ratio'),
+                  :class => css, :cs => (trIdx+=1).to_s, :ce => (trIdx + child.descendants.visible.count - 1).to_s, :rank => level.to_s, :style => hide_or_show)
+          end
+          s << '</table>'
+          #Compatible 3.3 and 3.4
+          subtask_list_accordion_tree_render_33? ? ('<form>' + s + '</form>').html_safe : s.html_safe
         end
-        s << '</table>'
-        s << (subtask_list_accordion_tree_render_33? ? '</form>' : '')
-        s.html_safe
       end
 
       def expand_tree_at_first?(issue)
@@ -56,6 +76,11 @@ module RedmineSubtaskListAccordion
 
       def subtask_tree_client_processing?
         return !Setting.plugin_redmine_subtask_list_accordion['enable_server_scripting_mode']
+      end
+
+      def subtask_list_accordion_tree_render_32?
+        threshold = [3,3,0]
+        return (Redmine::VERSION.to_a[0, 3] <=> threshold) < 0
       end
 
       def subtask_list_accordion_tree_render_33?

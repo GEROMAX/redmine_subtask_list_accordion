@@ -1,9 +1,9 @@
-# English strings go here for Rails i18n
+# Simplified Chinese strings go here for Rails i18n
 zh:
   list_all_expand: "全部展开"
   list_all_collapse: "全部收拢"
   context_menu_expand: "展开当前树形结构"
   context_menu_collapse: "收拢当前树形结构"
   context_menu_all_expand_next: "下一级全部展开"
-  field_subtasks_default_expand_limit_upper: "Upper limit of child issues to tree expanding from the first time"
-  label_enable_server_scripting_mode: "Enable server processing mode (Has many subtasks tree display more than faster, but tradeoff other subtask's plugin. for exsample 'subtask_list_columns' plugin)"
+  field_subtasks_default_expand_limit_upper: "子任务树中的问题数量上限（初次加载）"
+  label_enable_server_scripting_mode: "启用服务器处理模式（若存在多级树结构，启用该选项会较快，但可能会与其他子任务相关插件有冲突，如插件 'subtask_list_columns' ） "
