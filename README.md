@@ -1,13 +1,13 @@
 # Redmine Subtask List Accordion
 
-This plugin provide accordion to subtask list of issue.
+This plugin provide accordion tree to subtask-list on issue.
 
 * http://www.redmine.org/plugins/redmine_subtask_list_accordion
 
 ## Features
 
 * Add accordion feature to subtask-list.
-* Add function 'Expand this tree', 'Collapse this tree' and 'Expand next level all' to context-menu.
+* Add 'Expand this tree', 'Collapse this tree' and 'Expand next level all' to context-menu.
 * Add preferences of expand tree at first time.
 * Add plugin setting for server/client processing mode switch. (server mode default)  
 Server mode is faster than client mode, but server mode is tradeoff other subtask's plugin. (for exsample 'subtask_list_columns' plugin)
