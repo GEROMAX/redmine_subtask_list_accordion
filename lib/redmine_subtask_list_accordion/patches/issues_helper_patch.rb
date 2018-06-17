@@ -13,7 +13,7 @@ module RedmineSubtaskListAccordion
 
       #switch by enable condition
       def switch_render_descendants_tree(issue)
-        if has_grandson_issues?(issue) &&  !subtask_tree_client_processing?
+        if sla_has_grandson_issues?(issue) &&  !subtask_tree_client_processing?
           render_descendants_tree_accordion(issue)
         else
           render_descendants_tree_original(issue)
@@ -70,7 +70,7 @@ module RedmineSubtaskListAccordion
         return issue.descendants.visible.count <= User.current.pref.subtasks_default_expand_limit_upper
       end
 
-      def has_grandson_issues?(issue)
+      def sla_has_grandson_issues?(issue)
         return issue.descendants.visible.where(["issues.parent_id <> ?", issue.id]).count > 0
       end
 
