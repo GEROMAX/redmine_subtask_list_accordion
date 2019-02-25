@@ -49,13 +49,13 @@ tr.issue.haschild > td.subject > span.treearrow {
 }
 
 tr.issue.haschild.collapse > td.subject > span.treearrow {
-  background: url(../../../images/arrow_collapsed.png) no-repeat right bottom;
+  background: url(../../../images/arrow_right.png) no-repeat right bottom;
 }
 
 tr.issue.haschild.expand > td.subject > span.treearrow {
-  background: url(../../../images/arrow_expanded.png) no-repeat right bottom;
+  background: url(../../../images/arrow_down.png) no-repeat right bottom;
 }
 
-.icon-arrow-expanded { background-image: url(../../../images/arrow_expanded.png); }
+.icon-arrow-expanded { background-image: url(../../../images/arrow_down.png); }
 
-.icon-arrow-collapsed { background-image: url(../../../images/arrow_collapsed.png); }
+.icon-arrow-collapsed { background-image: url(../../../images/arrow_right.png); }
