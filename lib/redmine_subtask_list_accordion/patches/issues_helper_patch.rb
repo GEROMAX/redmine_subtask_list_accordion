@@ -23,7 +23,7 @@ module RedmineSubtaskListAccordion
       # add method to IssuesHelper
       def render_descendants_tree_accordion(issue)
         trIdx = 0
-        #switch under 3.2 or higher
+        #switch by redmine version
         if subtask_list_accordion_tree_render_32?
           s = '<form><table class="list issues">'
           issue_list(issue.descendants.visible.preload(:status, :priority, :tracker).sort_by(&:lft)) do |child, level|
@@ -57,11 +57,13 @@ module RedmineSubtaskListAccordion
                   content_tag('td', arrow + link_to_issue(child, :project => (issue.project_id != child.project_id)), :class => 'subject', :style => 'width: 50%') +
                   content_tag('td', h(child.status), :class => 'status') +
                   content_tag('td', link_to_user(child.assigned_to), :class => 'assigned_to') +
-                  content_tag('td', child.disabled_core_fields.include?('done_ratio') ? '' : progress_bar(child.done_ratio), :class=> 'done_ratio'),
+                  content_tag('td', child.disabled_core_fields.include?('done_ratio') ? '' : progress_bar(child.done_ratio), :class=> 'done_ratio') +
+                  #Compatible 3.4 under
+                  subtask_list_accordion_tree_render_34? ? '' : content_tag('td', link_to_context_menu, :class => 'buttons'),
                   :class => css, :cs => (trIdx+=1).to_s, :ce => (trIdx + child.descendants.visible.count - 1).to_s, :rank => level.to_s, :style => hide_or_show)
           end
           s << '</table>'
-          #Compatible 3.3 and 3.4
+          #Compatible 3.3 under
           subtask_list_accordion_tree_render_33? ? ('<form>' + s + '</form>').html_safe : s.html_safe
         end
       end
