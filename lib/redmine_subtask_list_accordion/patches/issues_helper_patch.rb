@@ -59,7 +59,7 @@ module RedmineSubtaskListAccordion
                   content_tag('td', link_to_user(child.assigned_to), :class => 'assigned_to') +
                   content_tag('td', child.disabled_core_fields.include?('done_ratio') ? '' : progress_bar(child.done_ratio), :class=> 'done_ratio') +
                   #Compatible 3.4 under
-                  subtask_list_accordion_tree_render_34? ? '' : content_tag('td', link_to_context_menu, :class => 'buttons'),
+                  (subtask_list_accordion_tree_render_34? ? '' : content_tag('td', link_to_context_menu, :class => 'buttons')),
                   :class => css, :cs => (trIdx+=1).to_s, :ce => (trIdx + child.descendants.visible.count - 1).to_s, :rank => level.to_s, :style => hide_or_show)
           end
           s << '</table>'
