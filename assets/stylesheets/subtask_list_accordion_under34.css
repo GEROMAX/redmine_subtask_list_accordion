@@ -17,11 +17,11 @@
 }
 
 .accordion_control a.subtask_all_expand {
-  background-image: url(../../../images/arrow_down.png);
+  background-image: url(../../../images/arrow_expanded.png);
 }
 
 .accordion_control a.subtask_all_collapse {
-  background-image: url(../../../images/arrow_right.png);
+  background-image: url(../../../images/arrow_collapsed.png);
 }
 
 tr.issue.idnt td.subject {background: none;}

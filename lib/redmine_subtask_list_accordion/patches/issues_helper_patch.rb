@@ -88,6 +88,21 @@ module RedmineSubtaskListAccordion
         return (Redmine::VERSION.to_a[0, 3] <=> threshold) < 0
       end
 
+      def subtask_list_accordion_tree_render_34?
+        threshold = [4,0,0]
+        return (Redmine::VERSION.to_a[0, 3] <=> threshold) < 0
+      end
+
+      def sla_use_css
+        case
+        when subtask_list_accordion_tree_render_32?
+          "subtask_list_accordion_under32"
+        when subtask_list_accordion_tree_render_34?
+          "subtask_list_accordion_under34"
+        else
+          "subtask_list_accordion"
+        end
+      end
     end
   end
 end
