@@ -49,13 +49,11 @@ tr.issue.haschild > td.subject > span.treearrow {
 }
 
 tr.issue.haschild.collapse > td.subject > span.treearrow {
-  background-position: 3px 50%;
-  background: url(../../../images/arrow_right.png) no-repeat right bottom;
+  background: url(../../../images/arrow_right.png) no-repeat 2px 50%;
 }
 
 tr.issue.haschild.expand > td.subject > span.treearrow {
-  background-position: 3px 50%;
-  background: url(../../../images/arrow_down.png) no-repeat right bottom;
+  background: url(../../../images/arrow_down.png) no-repeat 2px 50%;
 }
 
 .icon-arrow-expanded {
