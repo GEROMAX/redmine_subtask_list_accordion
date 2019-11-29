@@ -97,35 +97,3 @@ module RedmineSubtaskListAccordion
     end
   end
 end
-
-  # module Patches
-  #   module IssuesHelperPatch
-  #     extend ActiveSupport::Concern
-
-  #     #wrap original method
-  #     included do
-  #       alias_method :render_descendants_tree_original, :render_descendants_tree
-  #       alias_method :render_descendants_tree, :switch_render_descendants_tree
-  #       alias_method :sla_use_css, :sla_use_css
-  #       alias_method :switch_render_descendants_tree, :switch_render_descendants_tree
-  #       alias_method :render_descendants_tree_accordion, :render_descendants_tree_accordion
-  #       alias_method :expand_tree_at_first?,  :expand_tree_at_first?
-  #       alias_method :sla_has_grandson_issues?, :sla_has_grandson_issues?
-  #       alias_method :subtask_tree_client_processing?, :subtask_tree_client_processing?
-  #       alias_method :subtask_list_accordion_tree_render_32?, :subtask_list_accordion_tree_render_32?
-  #       alias_method :subtask_list_accordion_tree_render_33?, :subtask_list_accordion_tree_render_33?
-  #       alias_method :subtask_list_accordion_tree_render_34?, :subtask_list_accordion_tree_render_34?
-  #     end
-
-  #     #switch by enable condition
-  #     def switch_render_descendants_tree(issue)
-  #       if sla_has_grandson_issues?(issue) &&  !subtask_tree_client_processing?
-  #         render_descendants_tree_accordion(issue)
-  #       else
-  #         render_descendants_tree_original(issue)
-  #       end
-  #     end
-
-  #   end
-  # end
-# end
