@@ -8,8 +8,8 @@ reloader.to_prepare do
     UserPreference.send :prepend, RedmineSubtaskListAccordion::Patches::UserPreferencePatch
   end
 
-  unless IssuesHelper.included_modules.include?(RedmineSubtaskListAccordion::Patches::IssuesHelperPatch)
-    IssuesHelper.send :include, RedmineSubtaskListAccordion::Patches::IssuesHelperPatch
+  unless IssuesHelper.included_modules.include?(RedmineSubtaskListAccordion::IssuesHelper)
+    IssuesHelper.send :include, RedmineSubtaskListAccordion::IssuesHelper
   end
 end
 
