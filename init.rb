@@ -13,6 +13,10 @@ reloader.to_prepare do
   end
 end
 
+IssuesController.class_eval do
+  helper RedmineSubtaskListAccordion::IssuesHelper
+end
+
 Redmine::Plugin.register :redmine_subtask_list_accordion do
   name 'Redmine Subtask List Accordion plugin'
   author 'Ryuta Tobita'
