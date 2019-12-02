@@ -11,10 +11,10 @@ reloader.to_prepare do
   unless IssuesHelper.included_modules.include?(RedmineSubtaskListAccordion::IssuesHelper)
     IssuesHelper.send :include, RedmineSubtaskListAccordion::IssuesHelper
   end
-end
 
-IssuesController.class_eval do
-  helper RedmineSubtaskListAccordion::IssuesHelper
+  IssuesController.class_eval do
+    helper RedmineSubtaskListAccordion::IssuesHelper
+  end
 end
 
 Redmine::Plugin.register :redmine_subtask_list_accordion do
