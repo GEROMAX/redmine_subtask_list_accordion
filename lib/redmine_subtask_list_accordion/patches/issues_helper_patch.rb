@@ -1,5 +1,3 @@
-# require_dependency("issues_helper")
-
 module RedmineSubtaskListAccordion
   module IssuesHelper
     def render_descendants_tree(issue)
