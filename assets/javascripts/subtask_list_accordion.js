@@ -19,7 +19,7 @@ function childIssueShowOrHide(parentTR)
 function seletedTreeOpen()
 {
   var targetParents = slaTRs.filter("tr:has(td.checkbox > input:checked)");
-  for (var i = 0; i < targetParents.size(); i++)
+  for (var i = 0; i < targetParents.length; i++)
   {
     var parentTR = targetParents.eq(i);
     if (!parentTR.hasClass("haschild"))
@@ -39,7 +39,7 @@ function seletedTreeOpen()
 function seletedTreeClose()
 {
   var targetParents = slaTRs.filter("tr:has(td.checkbox > input:checked)");
-  for (var i = 0; i < targetParents.size(); i++)
+  for (var i = 0; i < targetParents.length; i++)
   {
     var parentTR = targetParents.eq(i);
     if (!parentTR.hasClass("haschild"))
@@ -59,7 +59,7 @@ function seletedTreeClose()
 function allExpandNext()
 {
   var parentTR = slaTRs.filter("tr:has(td.checkbox > input:checked)");
-  if (parentTR.size() != 1)
+  if (parentTR.length != 1)
   {
     exit;
   }
@@ -92,7 +92,7 @@ $(document).ready(function()
     slaTRs.show().filter(".haschild").removeClass("collapse").addClass("expand");
     
     //for debug
-    if (slaTRs.filter("tr:visible").size() != slaTRs.size()) alert("NG");
+    if (slaTRs.filter("tr:visible").length != slaTRs.length) alert("NG");
     
     return false;
   });

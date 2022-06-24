@@ -19,7 +19,7 @@ function getParentIssue(startPos, rank, sameTreeOnly)
   var selectorC = nextAttr + ":first";
   var pp = $(issuesSelector + selectorP + " + " + selectorC);
 
-  if (pp.size() != 1)
+  if (pp.length != 1)
   {
     //no parent
     return $();
@@ -99,7 +99,7 @@ function childIssueShowOrHide(parentTR)
 function setAccordion(parentPos, rank, isHiding, sameTreeOnly)
 {
   var parentTR = getParentIssue(parentPos, rank, sameTreeOnly);
-  if (parentTR.size() != 1)
+  if (parentTR.length != 1)
   {
     return false;
   }
@@ -145,7 +145,7 @@ function setAccordion(parentPos, rank, isHiding, sameTreeOnly)
 function seletedTreeOpen()
 {
   var targetParents = slaTRs.filter("tr:has(td.checkbox > input:checked)");
-  for (var i = 0; i < targetParents.size(); i++)
+  for (var i = 0; i < targetParents.length; i++)
   {
     var parentTR = targetParents.eq(i);
     if (!parentTR.hasClass("haschild"))
@@ -178,7 +178,7 @@ function seletedTreeOpen()
 function seletedTreeClose()
 {
   var targetParents = slaTRs.filter("tr:has(td.checkbox > input:checked)");
-  for (var i = 0; i < targetParents.size(); i++)
+  for (var i = 0; i < targetParents.length; i++)
   {
     var parentTR = targetParents.eq(i);
     if (!parentTR.hasClass("haschild"))
@@ -198,7 +198,7 @@ function seletedTreeClose()
 function allExpandNext()
 {
   var parentTR = slaTRs.filter("tr:has(td.checkbox > input:checked)");
-  if (parentTR.size() != 1)
+  if (parentTR.length != 1)
   {
     exit;
   }
@@ -236,7 +236,7 @@ $(document).ready(function()
   var expandTreeAtFirst = window.subtaskListAccordionExpandTreeAtFirst;
   //make rank first time
   slaTRs = $("table.list > tbody > tr");
-  slaTRsSize = slaTRs.size();
+  slaTRsSize = slaTRs.length;
   var analyzeTo = expandTreeAtFirst ? 10 : 1;
   var isHiding = !expandTreeAtFirst;
   var isSameTreeOnly = isHiding;
@@ -268,7 +268,7 @@ $(document).ready(function()
     slaTRs.show().filter(".haschild").removeClass("collapse").addClass("expand");
     
     //for debug
-    if (slaTRs.filter("tr:visible").size() != slaTRsSize)
+    if (slaTRs.filter("tr:visible").length != slaTRsSize)
     {
       alert("NG");
     }
