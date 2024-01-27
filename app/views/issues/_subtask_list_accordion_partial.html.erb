@@ -20,7 +20,7 @@
     var _contextMenuShow = contextMenuShow;
     isHideMenuSla = false;
     contextMenuShow = function(event){
-      if ($(event.target).parents("div[id='relations']").size() == 1 || !$("table.list > tbody > tr").is(".idnt-1"))
+      if ($(event.target).parents("div[id='relations']").length == 1 || !$("table.list > tbody > tr").is(".idnt-1"))
       {
         //hide this plugin menu
         isHideMenuSla = true;
