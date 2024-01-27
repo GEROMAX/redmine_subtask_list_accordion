@@ -1,4 +1,4 @@
-require 'issues_helper'
+require_dependency 'issues_helper'
 
 module RedmineSubtaskListAccordion
   module Patches

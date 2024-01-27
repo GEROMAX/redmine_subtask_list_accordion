@@ -1,6 +1,6 @@
-require File.expand_path('../lib/redmine_subtask_list_accordion/hooks/subtask_list_accordion_hook', __FILE__)
-require File.expand_path('../lib/redmine_subtask_list_accordion/patches/issues_helper_patch', __FILE__)
-require File.expand_path('../lib/redmine_subtask_list_accordion/patches/user_preference_patch', __FILE__)
+require_dependency File.expand_path('../lib/redmine_subtask_list_accordion/hooks/subtask_list_accordion_hook', __FILE__)
+require_dependency File.expand_path('../lib/redmine_subtask_list_accordion/patches/issues_helper_patch', __FILE__)
+require_dependency File.expand_path('../lib/redmine_subtask_list_accordion/patches/user_preference_patch', __FILE__)
 
 reloader = defined?(ActiveSupport::Reloader) ? ActiveSupport::Reloader : ActionDispatch::Reloader
 reloader.to_prepare do

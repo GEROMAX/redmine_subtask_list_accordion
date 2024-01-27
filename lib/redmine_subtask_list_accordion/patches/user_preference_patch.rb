@@ -1,4 +1,4 @@
-require 'user_preference'
+require_dependency 'user_preference'
 
 module RedmineSubtaskListAccordion
   module Patches
